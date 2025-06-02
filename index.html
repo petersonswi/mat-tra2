@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil Pessoal</title>
+    <style>
+        /* Estilos básicos para o corpo da página */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave para o tema */
+            color: #333; /* Cor do texto padrão */
+        }
+
+        /* Estilos para o tema escuro */
+        body.dark-theme {
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+        }
+
+        /* Estilos para o cartão de perfil */
+        .profile-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            padding: 35px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave para o tema */
+        }
+
+        .dark-theme .profile-card {
+            background-color: #3a3a3a;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Título principal */
+        h1 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 2.2em;
+        }
+
+        .dark-theme h1 {
+            color: #6daff7;
+        }
+
+        /* Imagem de perfil */
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 25px;
+            border: 4px solid #007bff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+
+        .dark-theme .profile-img {
+            border-color: #6daff7;
+        }
+
+        /* Parágrafo de descrição */
+        p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+
+        .dark-theme p {
+            color: #ccc;
+        }
+
+        /* Título dos hobbies */
+        h2 {
+            color: #333;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+
+        .dark-theme h2 {
+            color: #e0e0e0;
+        }
+
+        /* Lista de hobbies (agora botões) */
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 30px;
+            padding: 0;
+            list-style: none; /* Remove marcadores de lista */
+        }
+
+        .hobby-button {
+            background-color: #e9ecef;
+            color: #555;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            text-decoration: none; /* Garante que não haja sublinhado */
+            display: block; /* Garante que o link ocupe todo o espaço do grid item */
+        }
+
+        .hobby-button:hover {
+            background-color: #007bff;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .dark-theme .hobby-button {
+            background-color: #555;
+            color: #e0e0e0;
+        }
+
+        .dark-theme .hobby-button:hover {
+            background-color: #6daff7;
+            color: #333;
+        }
+
+        /* Botão "Entre em Contato" */
+        .contact-button {
+            display: inline-block;
+            background-color: #28a745; /* Um verde mais vibrante */
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        .dark-theme .contact-button {
+            background-color: #4CAF50; /* Verde adaptado ao tema escuro */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-theme .contact-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Botão de tema escuro */
+        .theme-toggle-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #6c757d; /* Cinza para o botão de toggle */
+            color: #fff;
+            border: none;
+            border-radius: 50%; /* Botão redondo */
+            width: 45px;
+            height: 45px;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            outline: none; /* Remove a borda de foco padrão */
+        }
+
+        .theme-toggle-button:hover {
+            background-color: #5a6268;
+            transform: scale(1.05);
+        }
+
+        .dark-theme .theme-toggle-button {
+            background-color: #927eff; /* Uma cor mais vibrante para o tema escuro */
+        }
+
+        .dark-theme .theme-toggle-button:hover {
+            background-color: #7a6be6;
+        }
+
+        /* Responsividade básica */
+        @media (max-width: 600px) {
+            .profile-card {
+                padding: 25px;
+                margin: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .hobby-button {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+
+            .contact-button {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+
+            .theme-toggle-button {
+                top: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle-button">🌙</button>
+
+    <div class="profile-card">
+        <h1>Monkey D luffy</h1>
+        <img src="img/images.png" alt="Foto de Perfil" class="profile-img">
+        <p>Olá! Sou luffy, um(a) entusiasta por one piece. Adoro explorar o mundo e estou sempre em busca de desafios criativos. Seja bem-vindo(a) ao meu perfil!</p>
+        
+        <h2>Meus Hobbies/Interesses:</h2>
+        <div class="hobbies-grid">
+            <a href="#" class="hobby-button" data-hobby="Cozinhar">comer</a>
+            <a href="#" class="hobby-button" data-hobby="Viagens">viajar</a>
+        </div>
+        
+        <a href="luffy@gmail.com" class="contact-button">Entre em Contato</a>
+    </div>
+
+    <script>
+        // Função para alternar o tema
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-theme');
+            // Salva a preferência do usuário no localStorage
+            if (document.body.classList.contains('dark-theme')) {
+                localStorage.setItem('theme', 'dark');
+                this.textContent = '☀️'; // Altera o ícone para sol
+            } else {
+                localStorage.setItem('theme', 'light');
+                this.textContent = '🌙'; // Altera o ícone para lua
+            }
+        });
+
+        // Verifica a preferência do usuário ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggleButton = document.getElementById('themeToggle');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeToggleButton.textContent = '☀️';
+            } else {
+                themeToggleButton.textContent = '🌙';
+            }
+
+            // Adiciona funcionalidade de clique aos botões de hobby (exemplo de alerta)
+            document.querySelectorAll('.hobby-button').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Impede a navegação do link
+                    const hobby = this.dataset.hobby;
+                    alert(`Você clicou em: ${hobby}!`); // Alerta simples, pode ser substituído por algo mais complexo
+                });
+            });
+        });
+    </script>
+</body>
+</html>
